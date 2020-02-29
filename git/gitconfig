@@ -1,0 +1,68 @@
+[user]
+	email = jun.ren@sushmobile.com
+	name = Jun Ren
+[diff]
+	tool = my_vimdiff
+[difftool "my_vimdiff"]
+	cmd = gvim -fd \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[merge]
+	tool = my_vimmerge
+[mergetool "my_vimmerge"]
+	cmd = gvim -fdc 'wincmd J' $MERGED $LOCAL $BASE $REMOTE
+[mergetool]
+	keepBackup = false
+[push]
+	default = current
+[color]
+  ui = auto
+[alias]
+  cm = commit
+  co = checkout
+  l1 = log --reverse --oneline
+  lg = log --all --oneline --graph
+  br = branch
+  ls = log --reverse --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --reverse --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lnc = log --reverse --pretty=format:"%h\\ %s\\ [%cn]"
+  lds = log --reverse --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ld = log --reverse --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+  filelog = log -u
+  fl = log -u
+  dl = "!git ll -1"
+  dlc = diff --cached HEAD^
+  dr  = "!f() { git diff "$1"^.."$1"; }; f"
+  lc  = "!f() { git ll "$1"^.."$1"; }; f"
+  diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+  f = "!git ls-files | grep -i"
+  ag = "!git ls-files | ag"
+  dif = "!git diff --word-diff-regex=."
+  st = status
+  pl = pull
+  ps = push
+[push]
+  default = current
+[rerere]
+  enabled = 1
+  autoupdate = true
+[core]
+  ignorecase = false
+  autocrlf = input
+	editor = gvim -f
+	pager = less -+$LESS -FRX
+	hooksPath = ~/.git_hooks/
+	excludesfile = ~/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+  template = /Users/jren/.stCommitMsg
+; gpgsign = true
+[pager]
+  log = false
+[pull]
+	rebase = true
