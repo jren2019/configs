@@ -1,16 +1,16 @@
 [user]
-	email = jun.ren@sushmobile.com
+	email = jun.ren.nz@gmail.com
 	name = Jun Ren
 [diff]
 	tool = my_vimdiff
 [difftool "my_vimdiff"]
-	cmd = gvim -fd \"$LOCAL\" \"$REMOTE\"
+	cmd = nvim -fd \"$LOCAL\" \"$REMOTE\"
 [difftool]
 	prompt = false
 [merge]
 	tool = my_vimmerge
 [mergetool "my_vimmerge"]
-	cmd = gvim -fdc 'wincmd J' $MERGED $LOCAL $BASE $REMOTE
+	cmd = nvim -fdc 'wincmd J' $MERGED $LOCAL $BASE $REMOTE
 [mergetool]
 	keepBackup = false
 [push]
@@ -20,6 +20,10 @@
 [alias]
   cm = commit
   co = checkout
+  his = log --oneline --pretty='format:\"%h | %s%d [%an]\"' --graph --date=iso
+  type = cat-file -t
+  dump = cat-file -p
+  dt = difftool -y
   l1 = log --reverse --oneline
   lg = log --all --oneline --graph
   br = branch
@@ -41,6 +45,8 @@
   st = status
   pl = pull
   ps = push
+  unstage = reset HEAD
+  count-lines = "! git log --author=\"$1\" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf \"added lines: %s, removed lines: %s, total lines: %s\\n\", add, subs, loc }' #"
 [push]
   default = current
 [rerere]
@@ -49,10 +55,10 @@
 [core]
   ignorecase = false
   autocrlf = input
-	editor = gvim -f
 	pager = less -+$LESS -FRX
 	hooksPath = ~/.git_hooks/
 	excludesfile = ~/.gitignore_global
+	editor = open -W -n
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
@@ -60,9 +66,13 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-  template = /Users/jren/.stCommitMsg
+template = ~/.setCommitMsg
 ; gpgsign = true
 [pager]
   log = false
 [pull]
 	rebase = true
+[credential]
+	helper = osxkeychain
+[url "git@github.com:"]
+	insteadOf = https://github.com/

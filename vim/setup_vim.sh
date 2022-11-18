@@ -1,10 +1,11 @@
 #! /bin/bash
 
 # Link the vimrc:
-ln -sf /Users/thomasverbeek/local_install/configs/vim/vimrc ~/.vimrc
+ln -sf $HOME/local_install/configs/vim/vimrc ~/.vimrc
 
 # Install Vundle:
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+       
 # Install the plugins:
 vim +PluginInstall +qal

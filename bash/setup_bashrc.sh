@@ -6,7 +6,7 @@ if [ ! -f "~/.bash_profile" ]; then
 fi
 
 # link to ~/.bashrc
-ln -sf /Users/thomasverbeek/local_install/configs/bash/bashrc ~/.bashrc
+ln -sf $HOME/local_install/configs/bash/bashrc ~/.bashrc
 
 pip3 install virtualenvwrapper
 

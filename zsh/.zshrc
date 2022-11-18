@@ -1,12 +1,13 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
-export ZSH=“/Users/thomasverbeek/.oh-my-zsh”
+export PATH=/usr/local/bin:$HOME/local_install/flutter/bin:$HOME/workspace/infocare/utility-scripts/posix:$HOME/local_install:$HOME/workspace/facteon/utility-scripts/posix:$PATH
+export ZSH=“$HOME/.oh-my-zsh”
 # Set name of the theme to load --- if set to “random”, it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME=“spaceship”
+ZSH_THEME="robbyrussell"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -48,6 +49,7 @@ ZSH_THEME=“spaceship”
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  tmux
   git
   bundler
   dotenv
@@ -57,6 +59,9 @@ plugins=(
   ruby
   zsh-syntax-highlighting
   pipenv
+  history-substring-search
+  zsh-autosuggestions
+  zsh-completions
 )
 source $ZSH/oh-my-zsh.sh
 # User configuration
@@ -70,6 +75,8 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR=‘mvim’
 # fi
+# Always use nvim
+alias vim="nvim"
 # Compilation flags
 # export ARCHFLAGS=“-arch x86_64”
 # ssh
@@ -83,7 +90,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig=“mate ~/.zshrc”
 # alias ohmyzsh=“mate ~/.oh-my-zsh”
 # for pycharm
-export PATH=“$PATH:/Users/jren/.local/bin”
+export PATH=“$PATH:$HOME/.local/bin”
 export PATH=$PATH:/opt/local/bin
 export PATH=“/usr/local/opt/mysql-client/bin:$PATH”
 alias cls=‘clear’
@@ -98,4 +105,43 @@ alias -s bz2=‘tar -xjvf’
 alias gst=‘git status’
 alias cdhome=‘cd ~’
 alias cdroot=‘cd /’
-alias copypath=‘pwd|pbcopy’
+alias copypath='pwd|pbcopy'
+
+# Some tmux-related shell aliases
+# Attaches tmux to the last session; creates a new session if none exists.
+alias t='tmux attach || tmux new-session'
+# Attaches tmux to a session (example: ta portal)
+alias ta='tmux attach -d -t'
+# Creates a new session
+alias tn='tmux new-session'
+# Lists all ongoing sessions
+alias tl='tmux list-sessions'
+
+# sql client
+alias cli='mycli -uroot -proot cosmoline_global'
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  # Load pyenv-virtualenv automatically by adding
+  # the following to ~/.zshrc:
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PATH=$HOME/bin:$HOME/local_install/tmux:/usr/local/bin:/home/jun/workspace/fuji_non_container/db_local/posix:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin/
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
